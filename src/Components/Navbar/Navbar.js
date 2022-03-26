@@ -1,5 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -9,9 +10,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
+import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
+
+import Link from '@mui/material/Link';
+import Login from '../../pages/Login';
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showLogin, setShowLogin] = useState(null);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -23,6 +29,10 @@ export default function MenuAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+    setShowLogin(null);
+  };
+  const handleLogin = (event) => {
+    setShowLogin(event.currentTarget);
   };
 
   return (
@@ -30,8 +40,18 @@ export default function MenuAppBar() {
       <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Photos
+            <Router>
+              <Link
+                component={RouterLink}
+                to='/'
+                underline='none'
+                color='white'
+              >
+                Photo
+              </Link>
+            </Router>
           </Typography>
+
           {auth && (
             <div>
               <IconButton
@@ -64,15 +84,50 @@ export default function MenuAppBar() {
               </Menu>
             </div>
           )}
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+
+          {!auth && (
+            <>
+              <IconButton
+                size='large'
+                edge='start'
+                color='inherit'
+                aria-label='menu'
+                sx={{ mr: 2 }}
+                onClick={handleLogin}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id='menu-appbar'
+                anchorEl={showLogin}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(showLogin)}
+                onClose={handleClose}
+              >
+                {/* <MenuItem Link={RouterLink} to='/login'>
+                  Login
+                </MenuItem> */}
+                {/* <MenuItem component={Link} to='/login'>
+                  Login
+                </MenuItem> */}
+                <MenuItem onClose={handleClose}>
+                  <Router>
+                    <Link component={RouterLink} to='/login' underline='none'>
+                      Login
+                    </Link>
+                  </Router>
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
