@@ -1,7 +1,11 @@
 import React from 'react';
-
+import About from '../../Components/About';
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <About />
+    </>
+  );
 }
 
 export default Dashboard;

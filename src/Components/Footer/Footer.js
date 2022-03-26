@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-const Inform = styled(ListItem)(({ theme }) => ({
+const Inform = styled(Link)(({ theme }) => ({
   color: theme.palette.text.primary,
   textDecoration: 'none',
 }));
@@ -78,29 +78,33 @@ export default function Footer() {
           <BoxFooter gridColumn='span 3' style={{ borderLeft: 'none' }}>
             <List>
               {informLinks.map(({ id, title, href }) => (
-                <Inform key={id} href={href}>
-                  {title}
-                </Inform>
+                <ListItem key={id}>
+                  <Inform key={id} href={href}>
+                    {title}
+                  </Inform>
+                </ListItem>
               ))}
             </List>
           </BoxFooter>
           <BoxFooter gridColumn='span 3'>
             <List>
               {siteLinks.map(({ id, title, href, pic }) => (
-                <Inform key={id} href={href}>
-                  {title || ''}
-                  {pic && (
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        width: '100%',
-                      }}
-                    >
-                      <FooterImg src={pic} alt={title} />
-                    </Box>
-                  )}
-                </Inform>
+                <ListItem key={id}>
+                  <Inform href={href} style={{ width: '100%' }}>
+                    {title || ''}
+                    {pic && (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          width: '100%',
+                        }}
+                      >
+                        <FooterImg src={pic} alt={title} />
+                      </Box>
+                    )}
+                  </Inform>
+                </ListItem>
               ))}
             </List>
           </BoxFooter>
