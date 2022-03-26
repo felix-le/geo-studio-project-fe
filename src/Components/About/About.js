@@ -32,10 +32,7 @@ function About() {
             <h1>Parry Sound</h1>
             <p>
               {' '}
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero,
-              quas aspernatur ex quasi quae, eius distinctio enim odit nisi
-              pariatur sequi debitis sit quos, aliquid corrupti? Reiciendis, aut
-              assumenda? Distinctio.
+              This is a new content 
             </p>
           </Grid>
           <Grid item xs={12} md={6}>
