@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   section: {
     paddingTop: '30px',
     paddingBottom: '30px',
+    background: '#D2C9B1',
   },
   imgWrapper: {
     maxWidth: 500,

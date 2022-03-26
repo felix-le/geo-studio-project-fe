@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import Link from '@mui/material/Link';
 import Login from '../../pages/Login';
@@ -34,7 +35,13 @@ export default function MenuAppBar() {
   const handleLogin = (event) => {
     setShowLogin(event.currentTarget);
   };
-
+  const handleChangePageToLogin = () => {
+    history.push('/login');
+    setShowLogin(null);
+  };
+  const handleChangeHome = () => {
+    history.push('/');
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
@@ -47,6 +54,7 @@ export default function MenuAppBar() {
                   to='/'
                   underline='none'
                   color='white'
+                  onClick={() => handleChangeHome()}
                 >
                   Photo
                 </Link>
@@ -121,7 +129,12 @@ export default function MenuAppBar() {
                 </MenuItem> */}
                   <MenuItem onClose={handleClose}>
                     <Router>
-                      <Link component={RouterLink} to='/login' underline='none'>
+                      <Link
+                        onClick={handleChangePageToLogin}
+                        component={RouterLink}
+                        to='/login'
+                        underline='none'
+                      >
                         Login
                       </Link>
                     </Router>
