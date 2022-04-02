@@ -9,7 +9,6 @@ function PublicRouter() {
   return (
     <Router history={history}>
       <Routes>
-        <Route path='/login' element={<Login />} />
         <Route path='/' element={<Dashboard />} />
       </Routes>
     </Router>
