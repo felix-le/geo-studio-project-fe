@@ -11,12 +11,45 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import logo1 from '../assets/images/logo1.png';
+import logo2 from '../assets/images/logo2.png';
+import user from '../assets/images/user.png';
 
-import Link from '@mui/material/Link';
-import Login from '../../pages/Login';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  root: {},
+
+  logoWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  buttonToggleWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  accountWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: '20px',
+    '& h6': {
+      fontSize: '14px',
+    },
+  },
+  avatar: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginLeft: '10px',
+  },
+});
+
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(false);
+  const styles = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [showLogin, setShowLogin] = useState(null);
 
@@ -47,101 +80,67 @@ export default function MenuAppBar() {
       <AppBar position='static'>
         <Container>
           <Toolbar>
-            <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-              <Router>
-                <Link
-                  component={RouterLink}
-                  to='/'
-                  underline='none'
-                  color='white'
-                  onClick={() => handleChangeHome()}
-                >
-                  Photo
-                </Link>
-              </Router>
+            <Typography component='div' sx={{ flexGrow: 1 }}>
+              <a href='/' className={styles.logoWrapper}>
+                <img src={logo1} alt='logo' />
+                <img src={logo2} alt='logo' />
+              </a>
             </Typography>
 
-            {auth && (
-              <div>
-                <IconButton
-                  size='large'
-                  aria-label='account of current user'
-                  aria-controls='menu-appbar'
-                  aria-haspopup='true'
-                  onClick={handleMenu}
-                  color='inherit'
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id='menu-appbar'
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
+            <div className={styles.buttonToggleWrapper}>
+              <div className={styles.accountWrapper}>
+                <Typography variant='h6' color='inherit'>
+                  Alexander Hipp
+                </Typography>
+                <div className={styles.avatar}>
+                  <img src={user} alt='user' />
+                </div>
               </div>
-            )}
-
-            {!auth && (
-              <>
-                <IconButton
-                  size='large'
-                  edge='start'
-                  color='inherit'
-                  aria-label='menu'
-                  sx={{ mr: 2 }}
-                  onClick={handleLogin}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id='menu-appbar'
-                  anchorEl={showLogin}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(showLogin)}
-                  onClose={handleClose}
-                >
-                  {/* <MenuItem Link={RouterLink} to='/login'>
+              <IconButton
+                size='large'
+                edge='start'
+                color='inherit'
+                aria-label='menu'
+                sx={{ mr: 2 }}
+                onClick={handleLogin}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id='menu-appbar'
+                anchorEl={showLogin}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(showLogin)}
+                onClose={handleClose}
+              >
+                {/* <MenuItem Link={RouterLink} to='/login'>
                   Login
                 </MenuItem> */}
-                  {/* <MenuItem component={Link} to='/login'>
+                {/* <MenuItem component={Link} to='/login'>
                   Login
                 </MenuItem> */}
-                  <MenuItem onClose={handleClose}>
-                    <Router>
-                      <Link
-                        onClick={handleChangePageToLogin}
-                        component={RouterLink}
-                        to='/login'
-                        underline='none'
-                      >
-                        Login
-                      </Link>
-                    </Router>
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
+                <MenuItem onClose={handleClose}>
+                  <Router>
+                    <div
+                    // onClick={handleChangePageToLogin}
+                    // component={RouterLink}
+                    // to='/login'
+                    // underline='none'
+                    >
+                      Something here
+                    </div>
+                  </Router>
+                </MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </Container>
       </AppBar>
