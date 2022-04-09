@@ -1,108 +1,147 @@
-import * as React from 'react';
-import { styled } from '@mui/system';
-import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#80BFFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
-  800: '#004C99',
-  900: '#003A75',
+import { useStyles } from './styles';
+
+import {
+  getCorporate,
+  getCommunities,
+  getForecasts,
+} from '../../api/getDataApi';
+
+import useRequest from '../../hooks/useRequest';
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles({
-  root: {},
-  digramsWrapper: {
-    background: '#D2C9B1',
-  },
-  tabWrapper: {
-    background: 'white',
-  },
-  tabList: {
-    background: '#D2C9B1',
-  },
-});
-
-const Tab = styled(TabUnstyled)`
-  font-family: sans-serif;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: bold;
-  background-color: '#D2C9B1';
-  width: 100%;
-  padding: 12px 16px;
-  margin: 6px 6px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  color: black;
-
-  &:hover {
-    background-color: ${blue[400]};
-  }
-
-  &:focus {
-    color: #fff;
-  }
-
-  &.${tabUnstyledClasses.selected} {
-    background-color: ${blue[50]};
-    color: ${blue[600]};
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const TabPanel = styled(TabPanelUnstyled)`
-  width: 100%;
-  font-family: sans-serif;
-  font-size: 0.875rem;
-`;
-
-const TabsList = styled(TabsListUnstyled)`
-  min-width: 320px;
-  background-color: '#D2C9B1',
-  border-radius: 8px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: space-between;
-`;
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
+  };
+}
 
 export default function Diagrams() {
+  const [value, setValue] = React.useState(0);
+
+  const [comunities, setCommunities] = useState([]);
+  const [corporate, setCorporate] = useState([]);
+  const [forecasts, setForecasts] = useState([]);
+  console.log(
+    '🚀 ~ file: Diagrams.js ~ line 57 ~ Diagrams ~ forecasts',
+    forecasts
+  );
+
   const styles = useStyles();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const fetchCommunities = useRequest({ request: getCommunities });
+
+  async function fetchCommunitiesFn() {
+    try {
+      const data = await fetchCommunities.execute();
+      setCommunities(data.data);
+    } catch (e) {
+      console.log('🚀 ~  fetchStudentFn ~ e', e);
+    }
+  }
+  // Do the same with the Corporate
+  const fetchCorporate = useRequest({ request: getCorporate });
+  async function fetchCorporateFn() {
+    try {
+      const data = await fetchCorporate.execute();
+      setCorporate(data.data);
+    } catch (e) {
+      console.log('🚀 ~  fetchStudentFn ~ e', e);
+    }
+  }
+
+  // Do the same with the forecasts
+  const fetchForecasts = useRequest({ request: getForecasts });
+  async function fetchForecastsFn() {
+    try {
+      const data = await fetchForecasts.execute();
+      setForecasts(data.data);
+    } catch (e) {
+      console.log('🚀 ~  fetchStudentFn ~ e', e);
+    }
+  }
+
+  useEffect(() => {
+    fetchCommunitiesFn();
+    fetchCorporateFn();
+    fetchForecastsFn();
+  }, []);
+
   return (
-    <div className={styles.digramsWrapper}>
+    <section className={styles.section}>
       <Container>
-        <TabsUnstyled defaultValue={0} className={styles.tabWrapper}>
-          <TabsList className={styles.tabList}>
-            <Tab>Carling</Tab>
-            <Tab>McKellar</Tab>
-            <Tab>Seguin</Tab>
-            <Tab>TOA</Tab>
-            <Tab>TOPS</Tab>
-          </TabsList>
-          <TabPanel value={0}>First content</TabPanel>
-          <TabPanel value={1}>Second content</TabPanel>
-          <TabPanel value={2}>Third content</TabPanel>
-          <TabPanel value={3}>4 content</TabPanel>
-          <TabPanel value={4}>5 content</TabPanel>
-        </TabsUnstyled>
+        <h1 className={styles.heading}>Visualize data</h1>
+        <div className={styles.tabWrapper}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              bgcolor: 'background.paper',
+              display: 'flex',
+            }}
+          >
+            <Tabs
+              orientation='vertical'
+              variant='scrollable'
+              value={value}
+              onChange={handleChange}
+              aria-label='Vertical tabs example'
+              sx={{ borderRight: 1, borderColor: 'divider' }}
+            >
+              <Tab label='Communities' {...a11yProps(0)} />
+              <Tab label='Corporates' {...a11yProps(1)} />
+              <Tab label='Forecasts' {...a11yProps(2)} />
+              <Tab label='Total CO2' {...a11yProps(3)} />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+              Communities
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              Corporates
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              Forecasts
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              Total CO2
+            </TabPanel>
+          </Box>
+        </div>
       </Container>
-    </div>
+    </section>
   );
 }

@@ -1,7 +1,17 @@
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: { width: '100%', height: '100%', padding: '2rem' },
+  root: {},
+
+  section: {
+    padding: '60px 0',
+  },
+  heading: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  tabWrapper: {},
 }));
 
 export { useStyles };
