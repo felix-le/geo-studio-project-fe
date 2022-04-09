@@ -6,14 +6,18 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
 import { useStyles } from './styles';
-
 import {
   getCorporate,
   getCommunities,
   getForecasts,
 } from '../../api/getDataApi';
-
+import { PieChart } from 'react-minimal-pie-chart';
 import useRequest from '../../hooks/useRequest';
+
+const defaultLabelStyle = {
+  fontSize: '5px',
+  fontFamily: 'sans-serif',
+};
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -53,16 +57,16 @@ export default function Diagrams() {
   const [comunities, setCommunities] = useState([]);
   const [corporate, setCorporate] = useState([]);
   const [forecasts, setForecasts] = useState([]);
-  console.log(
-    '🚀 ~ file: Diagrams.js ~ line 57 ~ Diagrams ~ forecasts',
-    forecasts
-  );
 
   const styles = useStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log(
+    '🚀 ~ file: Diagrams.js ~ line 54 ~ Diagrams ~ comunities',
+    comunities
+  );
 
   const fetchCommunities = useRequest({ request: getCommunities });
 
@@ -128,7 +132,19 @@ export default function Diagrams() {
               <Tab label='Total CO2' {...a11yProps(3)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-              Communities
+              <PieChart
+                label={({ dataEntry }) => {
+                  return `${dataEntry.value} ${dataEntry.title}`;
+                }}
+                labelStyle={{
+                  ...defaultLabelStyle,
+                }}
+                data={[
+                  { title: 'One', value: 10, color: '#E38627' },
+                  { title: 'Two', value: 15, color: '#C13C37' },
+                  { title: 'Three', value: 20, color: '#6A2135' },
+                ]}
+              />
             </TabPanel>
             <TabPanel value={value} index={1}>
               Corporates
