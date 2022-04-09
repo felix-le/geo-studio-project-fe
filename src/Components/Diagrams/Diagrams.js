@@ -11,13 +11,10 @@ import {
   getCommunities,
   getForecasts,
 } from '../../api/getDataApi';
-import { PieChart } from 'react-minimal-pie-chart';
 import useRequest from '../../hooks/useRequest';
 
-const defaultLabelStyle = {
-  fontSize: '5px',
-  fontFamily: 'sans-serif',
-};
+import PieChartComponents from './PieChartComponents';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -132,19 +129,7 @@ export default function Diagrams() {
               <Tab label='Total CO2' {...a11yProps(3)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-              <PieChart
-                label={({ dataEntry }) => {
-                  return `${dataEntry.value} ${dataEntry.title}`;
-                }}
-                labelStyle={{
-                  ...defaultLabelStyle,
-                }}
-                data={[
-                  { title: 'One', value: 10, color: '#E38627' },
-                  { title: 'Two', value: 15, color: '#C13C37' },
-                  { title: 'Three', value: 20, color: '#6A2135' },
-                ]}
-              />
+              <PieChartComponents />
             </TabPanel>
             <TabPanel value={value} index={1}>
               Corporates

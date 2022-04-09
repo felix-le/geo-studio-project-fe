@@ -15,17 +15,12 @@
     "@mui/material": "^5.5.3",
     "@mui/styles": "^5.5.3",
     "axios": "^0.26.1",
-    "chart.js": "^3.7.1",
-    "chartjs": "^0.3.24",
-    "chartjs-plugin-datalabels": "^2.0.0",
-    "chartjs-plugin-piechart-outlabels": "^0.1.4",
     "react": "latest",
-    "react-chartjs-2": "^4.1.0",
     "react-dom": "latest",
-    "react-minimal-pie-chart": "^8.2.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "latest",
-    "react-swipeable-views": "^0.14.0"
+    "react-swipeable-views": "^0.14.0",
+    "react-minimal-pie-chart": "^8.2.0"
   },
   "browserslist": {
     "production": [
