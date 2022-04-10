@@ -52,25 +52,7 @@ function About() {
               town of Depot Harbour on August 14, 1945.
             </p>
 
-            <p>
-              The body of water that gives the town its name was surveyed and
-              named by Captain (later Admiral) Henry Wolsey Bayfield in the 19th
-              century, in honour of the Arctic explorer Sir William Edward
-              Parry. In 1857, the modern townsite was established near the
-              Ojibwa village of Wasauksing ("shining shore") at the mouth of the
-              Seguin River. The post office was established in 1865.[3] Parry
-              Sound was incorporated as a town in 1887. In the late 19th
-              century, rail service was established, making the town an
-              important depot along the rail lines to Western Canada.
-            </p>
-
-            <p>
-              In 1916, a cordite factory was established in the nearby town of
-              Nobel for the Imperial Munitions Board. In the late 1920s and
-              early 1930s, an explosives and munitions factory was also built at
-              Nobel, making Parry Sound an important part of both the First
-              World War and the Second World War effort.
-            </p>
+         
           </Grid>
           <Grid item xs={12} lg={6} order={{ xs: 1, lg: 2 }}>
             <div className={styles.imgWrapper}>
