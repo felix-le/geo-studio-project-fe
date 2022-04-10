@@ -88,14 +88,14 @@ export default function MenuAppBar() {
             </Typography>
 
             <div className={styles.buttonToggleWrapper}>
-              <div className={styles.accountWrapper}>
+              {/* <div className={styles.accountWrapper}>
                 <Typography variant='h6' color='inherit'>
                   Alexander Hipp
                 </Typography>
                 <div className={styles.avatar}>
                   <img src={user} alt='user' />
                 </div>
-              </div>
+              </div> */}
               <IconButton
                 size='large'
                 edge='start'

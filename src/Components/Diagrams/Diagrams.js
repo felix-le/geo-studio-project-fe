@@ -13,10 +13,10 @@ import {
 } from '../../api/getDataApi';
 import useRequest from '../../hooks/useRequest';
 import PieChartComponents from './PieChartComponents';
-
+import { stylesPieWapper } from './stylesPieWapper';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  const classes = stylesPieWapper();
   return (
     <div
       role='tabpanel'
@@ -26,9 +26,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <div>{children}</div>
-        </Box>
+        <div className={classes.pieDiagramWrapper}>{children}</div>
       )}
     </div>
   );
@@ -226,7 +224,7 @@ export default function Diagrams() {
   return (
     <section className={styles.section}>
       <Container>
-        <h1 className={styles.heading}>Visualize data</h1>
+        <h1 className={styles.heading}>Total Emissions</h1>
         <div className={styles.tabWrapper}>
           <Box
             sx={{
@@ -244,7 +242,7 @@ export default function Diagrams() {
               sx={{ borderRight: 1, borderColor: 'divider' }}
             >
               <Tab label='Communities' {...a11yProps(0)} />
-              <Tab label='Corporates' {...a11yProps(1)} />
+              <Tab label='Corporate' {...a11yProps(1)} />
               <Tab label='Forecasts' {...a11yProps(2)} />
               <Tab label='Total CO2' {...a11yProps(3)} />
             </Tabs>
