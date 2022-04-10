@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
 import { useStyles } from './styles';
@@ -10,6 +9,7 @@ import {
   getCorporate,
   getCommunities,
   getForecasts,
+  getTotal,
 } from '../../api/getDataApi';
 import useRequest from '../../hooks/useRequest';
 import PieChartComponents from './PieChartComponents';
@@ -119,12 +119,18 @@ const corporateLabels = [
 ];
 
 const forecastLabels = [
-  // CO2
-  // co2
   {
     id: 1,
     label: 'co2',
     title: 'CO2',
+  },
+];
+
+const totalLabels = [
+  {
+    id: 1,
+    label: 'totalco2',
+    title: 'Total CO2',
   },
 ];
 
@@ -136,10 +142,8 @@ export default function Diagrams() {
   const [corporate, setCorporate] = useState([]);
 
   const [forecasts, setForecasts] = useState([]);
-  console.log(
-    '🚀 ~ file: Diagrams.js ~ line 134 ~ Diagrams ~ forecasts',
-    forecasts
-  );
+
+  const [total, setTotal] = useState([]);
 
   const styles = useStyles();
 
@@ -179,11 +183,22 @@ export default function Diagrams() {
       console.log('🚀 ~  fetchStudentFn ~ e', e);
     }
   }
+  // Do the same with the total
+  const fetchTotal = useRequest({ request: getTotal });
+  async function fetchTotalFn() {
+    try {
+      const data = await fetchTotal.execute();
+      setTotal(data.data);
+    } catch (e) {
+      console.log('🚀 ~  fetchStudentFn ~ e', e);
+    }
+  }
 
   useEffect(() => {
     fetchCommunitiesFn();
     fetchCorporateFn();
     fetchForecastsFn();
+    fetchTotalFn();
   }, []);
 
   const getResults = (data, labels) => {
@@ -206,6 +221,8 @@ export default function Diagrams() {
   const communityResults = getResults(communities, comunityLabels);
   const corporateResults = getResults(corporate, corporateLabels);
   const forecastResults = getResults(forecasts, forecastLabels);
+  const totalResults = getResults(total, totalLabels);
+
   return (
     <section className={styles.section}>
       <Container>
@@ -250,7 +267,8 @@ export default function Diagrams() {
               />
             </TabPanel>
             <TabPanel value={value} index={3}>
-              Total CO2
+              {/* total, totalLabels */}
+              <PieChartComponents data={totalResults} labels={totalLabels} />
             </TabPanel>
           </Box>
         </div>

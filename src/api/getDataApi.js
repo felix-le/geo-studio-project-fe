@@ -10,3 +10,6 @@ export async function getCommunities() {
 export async function getForecasts() {
   return get(`/api/forecast `);
 }
+export async function getTotal() {
+  return get(`/api/total`);
+}
