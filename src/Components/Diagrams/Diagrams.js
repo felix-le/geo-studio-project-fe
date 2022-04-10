@@ -12,7 +12,6 @@ import {
   getForecasts,
 } from '../../api/getDataApi';
 import useRequest from '../../hooks/useRequest';
-
 import PieChartComponents from './PieChartComponents';
 
 function TabPanel(props) {
@@ -28,7 +27,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -47,23 +46,106 @@ function a11yProps(index) {
     'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+const comunityLabels = [
+  {
+    id: 1,
+    label: 'commercial',
+    title: 'Commercial & Institutional',
+  },
+  {
+    id: 2,
+    label: 'industrial',
+    title: 'Industrial',
+  },
+  {
+    id: 3,
+    label: 'offroad',
+    title: 'Off-Road Transport',
+  },
+  {
+    id: 4,
+    label: 'onroad',
+    title: 'On-Road Transport',
+  },
+  {
+    id: 5,
+    label: 'residential',
+    title: 'Residential',
+  },
+  { id: 6, label: 'waste', title: 'Waste', color: '#a02ab2' },
+  {
+    id: 7,
+    label: 'water',
+    title: 'Waterborne Transport',
+  },
+];
+const corporateLabels = [
+  // Buildings & Facilities	Water & Wastewater	Streetlights	Fleet	Waste
+  // building fleet name:  street: waste: water:
+
+  {
+    id: 1,
+    label: 'building',
+    title: 'Buildings & Facilities',
+  },
+  {
+    id: 2,
+    label: 'water',
+    title: 'Water & Wastewater',
+  },
+  {
+    id: 3,
+    label: 'street',
+    title: 'Streetlights',
+  },
+  {
+    id: 4,
+    label: 'fleet',
+    title: 'Fleet',
+  },
+  {
+    id: 5,
+    label: 'waste',
+    title: 'Waste',
+  },
+];
+
+const forecastLabels = [
+  // CO2
+  // co2
+  {
+    id: 1,
+    label: 'co2',
+    title: 'CO2',
+  },
+];
 
 export default function Diagrams() {
   const [value, setValue] = React.useState(0);
 
-  const [comunities, setCommunities] = useState([]);
+  const [communities, setCommunities] = useState([]);
+
   const [corporate, setCorporate] = useState([]);
+
   const [forecasts, setForecasts] = useState([]);
+  console.log(
+    '🚀 ~ file: Diagrams.js ~ line 134 ~ Diagrams ~ forecasts',
+    forecasts
+  );
 
   const styles = useStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(
-    '🚀 ~ file: Diagrams.js ~ line 54 ~ Diagrams ~ comunities',
-    comunities
-  );
 
   const fetchCommunities = useRequest({ request: getCommunities });
 
@@ -75,6 +157,7 @@ export default function Diagrams() {
       console.log('🚀 ~  fetchStudentFn ~ e', e);
     }
   }
+
   // Do the same with the Corporate
   const fetchCorporate = useRequest({ request: getCorporate });
   async function fetchCorporateFn() {
@@ -103,6 +186,26 @@ export default function Diagrams() {
     fetchForecastsFn();
   }, []);
 
+  const getResults = (data, labels) => {
+    const result = [];
+    labels.map(({ label, title }) => {
+      data.map((item) => {
+        if (item[label]) {
+          const newObj = {
+            title: item['name'],
+            value: parseInt(item[label]),
+            color: `${getRandomColor()}`,
+            type: title,
+          };
+          result.push(newObj);
+        }
+      });
+    });
+    return result;
+  };
+  const communityResults = getResults(communities, comunityLabels);
+  const corporateResults = getResults(corporate, corporateLabels);
+  const forecastResults = getResults(forecasts, forecastLabels);
   return (
     <section className={styles.section}>
       <Container>
@@ -128,14 +231,23 @@ export default function Diagrams() {
               <Tab label='Forecasts' {...a11yProps(2)} />
               <Tab label='Total CO2' {...a11yProps(3)} />
             </Tabs>
-            <TabPanel value={value} index={0}>
-              <PieChartComponents />
+            <TabPanel value={value} index={0} component='div'>
+              <PieChartComponents
+                data={communityResults}
+                labels={comunityLabels}
+              />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Corporates
+              <PieChartComponents
+                data={corporateResults}
+                labels={corporateLabels}
+              />
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Forecasts
+              <PieChartComponents
+                data={forecastResults}
+                labels={forecastLabels}
+              />
             </TabPanel>
             <TabPanel value={value} index={3}>
               Total CO2

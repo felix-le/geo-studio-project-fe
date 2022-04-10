@@ -6,21 +6,46 @@ const defaultLabelStyle = {
   fontFamily: 'sans-serif',
 };
 
-const PieChartComponents = () => {
+const PieShow = ({ data }) => {
   return (
-    <PieChart
-      label={({ dataEntry }) => {
-        return `${dataEntry.value} ${dataEntry.title}`;
-      }}
-      labelStyle={{
-        ...defaultLabelStyle,
-      }}
-      data={[
-        { title: 'One', value: 10, color: '#E38627' },
-        { title: 'Two', value: 15, color: '#C13C37' },
-        { title: 'Three', value: 20, color: '#6A2135' },
-      ]}
-    />
+    <>
+      <PieChart
+        label={({ dataEntry }) => {
+          return `${dataEntry.value} ${dataEntry.title}`;
+        }}
+        labelStyle={{
+          ...defaultLabelStyle,
+        }}
+        data={data}
+      />
+    </>
+  );
+};
+
+const PieChartComponents = ({ data, labels }) => {
+  const groupedData = [];
+
+  labels.map((label) => {
+    if (data.length > 0) {
+      groupedData.push(data.filter((item) => item['type'] == label.title));
+    }
+  });
+
+  return (
+    <>
+      {groupedData.length > 0 && (
+        <>
+          {groupedData.map((item, index) => {
+            return (
+              <div key={index}>
+                <h1>{item[0]['type']}</h1>
+                {item.length > 0 && <PieShow data={item} />}
+              </div>
+            );
+          })}
+        </>
+      )}
+    </>
   );
 };
 
