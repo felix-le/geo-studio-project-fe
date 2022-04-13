@@ -20,7 +20,9 @@ import user from '../assets/images/user.png';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    width: '100%',
+  },
 
   logoWrapper: {
     display: 'flex',
@@ -86,8 +88,11 @@ export default function MenuAppBar() {
               <a href='/' className={styles.logoWrapper}>
                 <img src={logo1} alt='logo' />
                 <img src={logo2} alt='logo' />
-                <img src={logo4} alt='logo' style={{height: "40px", width:"auto"}}/>
-
+                <img
+                  src={logo4}
+                  alt='logo'
+                  style={{ height: '40px', width: 'auto' }}
+                />
               </a>
             </Typography>
 

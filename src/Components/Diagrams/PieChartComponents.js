@@ -3,7 +3,9 @@ import { PieChart } from 'react-minimal-pie-chart';
 import { makeStyles } from '@mui/styles';
 import { sumBy } from 'lodash';
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    width: '100%',
+  },
   singlePie: {
     width: '50%',
     padding: '5%',
@@ -13,11 +15,18 @@ const useStyles = makeStyles((theme) => ({
   titlePercentageWrapper: {
     display: 'flex',
     marginTop: '30px',
+    textAlign: 'center',
+    '@media (max-width: 1000px)': {
+      flexWrap: 'wrap',
+    },
   },
   titlePercentage: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
     marginRight: '10px',
+    '@media (max-width: 1000px)': {
+      fontSize: '0.8rem',
+    },
   },
 }));
 const defaultLabelStyle = {
