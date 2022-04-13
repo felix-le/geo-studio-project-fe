@@ -230,7 +230,6 @@ export default function Diagrams() {
             sx={{
               flexGrow: 1,
               bgcolor: 'background.paper',
-              display: 'flex',
             }}
           >
             <Tabs
@@ -239,14 +238,18 @@ export default function Diagrams() {
               value={value}
               onChange={handleChange}
               aria-label='Vertical tabs example'
-              sx={{ borderRight: 1, borderColor: 'divider' }}
+              className={styles.tabs}
             >
-              <Tab label='Communities' {...a11yProps(0)} />
-              <Tab label='Corporate' {...a11yProps(1)} />
-              <Tab label='Forecasts' {...a11yProps(2)} />
-              <Tab label='Total CO2' {...a11yProps(3)} />
+              <Tab
+                label='Communities'
+                {...a11yProps(0)}
+                className={styles.tab}
+              />
+              <Tab label='Corporate' {...a11yProps(1)} className={styles.tab} />
+              <Tab label='Forecasts' {...a11yProps(2)} className={styles.tab} />
+              <Tab label='Total CO2' {...a11yProps(3)} className={styles.tab} />
             </Tabs>
-            <TabPanel value={value} index={0} component='div'>
+            <TabPanel value={value} index={0}>
               <PieChartComponents
                 data={communityResults}
                 labels={comunityLabels}
