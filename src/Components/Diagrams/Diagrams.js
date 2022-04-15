@@ -15,6 +15,7 @@ import useRequest from '../../hooks/useRequest';
 import PieChartComponents from './PieChartComponents';
 import { stylesPieWapper } from './stylesPieWapper';
 import BarChart from './BarChart';
+import LineCharts from './LineCharts';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   const classes = stylesPieWapper();
@@ -292,6 +293,7 @@ export default function Diagrams() {
                 labels={comunityLabels}
               />
               <BarChart newData={communityBarChartData} title='Communities' />
+              <LineCharts newData={communityBarChartData} title='Communities' />
             </TabPanel>
             <TabPanel value={value} index={1}>
               <PieChartComponents
@@ -299,6 +301,7 @@ export default function Diagrams() {
                 labels={corporateLabels}
               />
               <BarChart newData={corporateBarChartData} title='Corporate' />
+              <LineCharts newData={corporateBarChartData} title='Corporate' />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <PieChartComponents
@@ -306,12 +309,14 @@ export default function Diagrams() {
                 labels={forecastLabels}
               />
               <BarChart newData={forecastsBarChartData} title='Forecasts' />
+              <LineCharts newData={forecastsBarChartData} title='Forecasts' />
             </TabPanel>
             <TabPanel value={value} index={3}>
               {/* total, totalBarChartData */}
               <PieChartComponents data={totalResults} labels={totalLabels} />
               {/* totalBarChartData */}
               <BarChart newData={totalBarChartData} title='Total' />
+              <LineCharts newData={totalBarChartData} title='Total' />
             </TabPanel>
           </Box>
         </div>
