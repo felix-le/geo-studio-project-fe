@@ -200,16 +200,16 @@ export default function Diagrams() {
     fetchForecastsFn();
     fetchTotalFn();
   }, []);
-
+  const colours = ['FE0000', 'A5A5A5', 'A2231D', '3F888F', '5D9B9B'];
   const getResults = (data, labels) => {
     const result = [];
     labels.map(({ label, title }) => {
-      data.map((item) => {
+      data.map((item, i) => {
         if (item[label]) {
           const newObj = {
             title: item['name'],
             value: parseInt(item[label]),
-            color: `${getRandomColor()}`,
+            color: `#${colours[i]}`,
             type: title,
           };
           result.push(newObj);
