@@ -14,6 +14,7 @@ import {
 import useRequest from '../../hooks/useRequest';
 import PieChartComponents from './PieChartComponents';
 import { stylesPieWapper } from './stylesPieWapper';
+import BarChart from './BarChart';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   const classes = stylesPieWapper();
@@ -217,9 +218,45 @@ export default function Diagrams() {
     return result;
   };
   const communityResults = getResults(communities, comunityLabels);
+
   const corporateResults = getResults(corporate, corporateLabels);
   const forecastResults = getResults(forecasts, forecastLabels);
   const totalResults = getResults(total, totalLabels);
+
+  const getBarChartData = (data) => {
+    const result = [];
+    // get all labels in object in data array
+    if (data.length > 0) {
+      const labels = Object.keys(data[0]).slice(1);
+      // get all values in object in data array
+      let arr = data.map((obj) => {
+        // remove first element of array
+        return Object.values(obj).slice(1);
+      });
+      const newArr = arr.map((item) => {
+        // conver each element in item to number
+        // if cannot conver to number, return its value
+
+        return item.map((value) => {
+          if (value === '0') {
+            return 0;
+          } else if (!Number(value)) {
+            return value;
+          } else {
+            return Number(value);
+          }
+        });
+      });
+      //concat labels and arr
+      result.push(labels, ...newArr);
+    }
+    return result;
+  };
+
+  const communityBarChartData = getBarChartData(communities);
+  const corporateBarChartData = getBarChartData(corporate);
+  const forecastsBarChartData = getBarChartData(forecasts);
+  const totalBarChartData = getBarChartData(total);
 
   return (
     <section className={styles.section}>
@@ -254,22 +291,27 @@ export default function Diagrams() {
                 data={communityResults}
                 labels={comunityLabels}
               />
+              <BarChart newData={communityBarChartData} title='Communities' />
             </TabPanel>
             <TabPanel value={value} index={1}>
               <PieChartComponents
                 data={corporateResults}
                 labels={corporateLabels}
               />
+              <BarChart newData={corporateBarChartData} title='Corporate' />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <PieChartComponents
                 data={forecastResults}
                 labels={forecastLabels}
               />
+              <BarChart newData={forecastsBarChartData} title='Forecasts' />
             </TabPanel>
             <TabPanel value={value} index={3}>
-              {/* total, totalLabels */}
+              {/* total, totalBarChartData */}
               <PieChartComponents data={totalResults} labels={totalLabels} />
+              {/* totalBarChartData */}
+              <BarChart newData={totalBarChartData} title='Total' />
             </TabPanel>
           </Box>
         </div>
