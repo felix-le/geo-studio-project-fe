@@ -10,6 +10,7 @@ import { makeStyles } from '@mui/styles';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import SettingsCellIcon from '@mui/icons-material/SettingsCell';
+
 const data = [
   {
     id: 1,
@@ -89,9 +90,9 @@ const useStyles = makeStyles((theme) => ({
       margin: '10px',
     },
   },
-  cardTitle:{
-    textAlign:'center',
-      },
+  cardTitle: {
+    textAlign: 'center',
+  },
 }));
 const BasicCard = ({ icon, title, subTitle }) => {
   const styles = useStyles();
@@ -102,8 +103,7 @@ const BasicCard = ({ icon, title, subTitle }) => {
         <Typography variant='h3' component='div' className={styles.cardTitle}>
           {title}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-        </Typography>
+        <Typography sx={{ mb: 1.5 }} color='text.secondary'></Typography>
         <Typography variant='body2'>{subTitle}</Typography>
       </CardContent>
     </Card>
