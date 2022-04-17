@@ -5,44 +5,47 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
 import SpaIcon from '@mui/icons-material/Spa';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { makeStyles } from '@mui/styles';
-
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import SettingsCellIcon from '@mui/icons-material/SettingsCell';
 const data = [
   {
     id: 1,
     icon: <CarRepairIcon />,
     title: '18,571.1 km',
-    subTitle: 'Total distance',
+    subTitle: 'not driven by an average passenger vehicle',
   },
   {
     id: 2,
     icon: <SpaIcon />,
-    title: 'title 2',
-    subTitle: 'sdflkjdfkdl',
+    title: '76.6',
+    subTitle: 'tree seedlings grown for 10 years',
   },
   {
     id: 3,
-    icon: <CarRepairIcon />,
-    title: 'title 3',
-    subTitle: 'Total distance 3',
+    icon: <LightbulbIcon />,
+    title: '174.0 ',
+    subTitle: 'Incandescent lamps switched to LEDs',
   },
   {
     id: 4,
-    icon: <CarRepairIcon />,
-    title: 'title 4',
-    subTitle: 'Total distance 4',
+    icon: <RestoreFromTrashIcon />,
+    title: '195.5',
+    subTitle: 'trash bags of waste recycled instead of landfilled',
   },
   {
     id: 5,
-    icon: <CarRepairIcon />,
-    title: 'title 5',
-    subTitle: 'Total distance 5',
+    icon: <LocalGasStationIcon />,
+    title: '1,956.7 L ',
+    subTitle: 'of gasoline not consumed',
   },
   {
     id: 6,
-    icon: <CarRepairIcon />,
-    title: 'title 6',
-    subTitle: 'Total distance 6',
+    icon: <SettingsCellIcon />,
+    title: '558,845.5',
+    subTitle: 'smartphones not charged    ',
   },
 ];
 
@@ -86,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
       margin: '10px',
     },
   },
+  cardTitle:{
+    textAlign:'center',
+      },
 }));
 const BasicCard = ({ icon, title, subTitle }) => {
   const styles = useStyles();
@@ -93,11 +99,10 @@ const BasicCard = ({ icon, title, subTitle }) => {
     <Card className={styles.card}>
       <div className={styles.cardHeader}>{icon}</div>
       <CardContent>
-        <Typography variant='h3' component='div'>
+        <Typography variant='h3' component='div' className={styles.cardTitle}>
           {title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-          adjective
         </Typography>
         <Typography variant='body2'>{subTitle}</Typography>
       </CardContent>
