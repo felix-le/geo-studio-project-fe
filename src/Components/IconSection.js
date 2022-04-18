@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
     '& svg': {
       width: '100%',
-      maxHeight: '200px',
+      maxHeight: '100px',
       height: '100%',
       color: 'white',
     },
@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]: {},
+    textAlign: 'center',
   },
   cardWrapper: {
     width: 'calc(30% - 20px)',

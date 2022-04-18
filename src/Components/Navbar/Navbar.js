@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { BrowserRouter as Router, Link as RouterLink } from 'react-router-dom';
 import logo1 from '../assets/images/logo1.png';
 import logo2 from '../assets/images/logo2.png';
-import logo4 from '../assets/images/logo4.png';
+import logo4 from '../assets/images/logo4.jpeg';
 
 import user from '../assets/images/user.png';
 
@@ -22,6 +22,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    fontFamily: "'Tajawal', sans-serif",
   },
 
   logoWrapper: {
@@ -86,13 +87,12 @@ export default function MenuAppBar() {
           <Toolbar>
             <Typography component='div' sx={{ flexGrow: 1 }}>
               <a href='/' className={styles.logoWrapper}>
-                <img src={logo1} alt='logo' />
-                <img src={logo2} alt='logo' />
-                {/* <img
+                <img
                   src={logo4}
                   alt='logo'
                   style={{ height: '40px', width: 'auto' }}
-                /> */}
+                />
+                <img src={logo2} alt='logo' />
               </a>
             </Typography>
 

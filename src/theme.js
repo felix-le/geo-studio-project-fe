@@ -16,6 +16,9 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  typography: {
+    fontFamily: ['Hind', 'sans-serif'],
+  },
 });
 
 export default theme;

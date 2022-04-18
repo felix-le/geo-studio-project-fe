@@ -16,14 +16,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     marginTop: '30px',
     textAlign: 'center',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
     '@media (max-width: 1000px)': {
       flexWrap: 'wrap',
     },
+    fontFamily: "'Tajawal', sans-serif",
   },
   titlePercentage: {
     fontSize: '1rem',
     fontWeight: 'bold',
     marginRight: '10px',
+    textAlign: 'center',
     '@media (max-width: 1000px)': {
       fontSize: '0.8rem',
     },
