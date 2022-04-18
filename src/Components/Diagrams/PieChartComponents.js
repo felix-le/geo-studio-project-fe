@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   singlePie: {
-    width: '50%',
+    width: '30%',
     padding: '5%',
     textAlign: 'center',
   },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   titlePercentage: {
-    fontSize: '1.5rem',
+    fontSize: '1rem',
     fontWeight: 'bold',
     marginRight: '10px',
     '@media (max-width: 1000px)': {
