@@ -92,6 +92,12 @@ export default function MenuAppBar() {
                   alt='logo'
                   style={{ height: '40px', width: 'auto' }}
                 />
+                <img
+                  src={logo1}
+                  alt='logo'
+                  style={{ height: '60px', width: 'auto' }}
+                />
+
                 <img src={logo2} alt='logo' />
               </a>
             </Typography>
