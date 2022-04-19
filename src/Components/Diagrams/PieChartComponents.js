@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const defaultLabelStyle = {
   fontSize: '5px',
-  fontFamily: 'sans-serif',
+    fontFamily: 'Tajawal', 'sans-serif',
 };
 function percentage(partialValue, totalValue) {
   if (partialValue == 0) {
