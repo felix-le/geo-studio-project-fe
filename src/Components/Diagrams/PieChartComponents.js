@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 1000px)': {
       flexWrap: 'wrap',
     },
-    fontFamily: "'Tajawal', sans-serif",
+    fontFamily: "Tajawal", "sans-serif",Arial, Helvetica, sans-serif
   },
   titlePercentage: {
     fontSize: '1rem',
