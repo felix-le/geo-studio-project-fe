@@ -200,7 +200,7 @@ export default function Diagrams() {
     fetchForecastsFn();
     fetchTotalFn();
   }, []);
-  const colours = ['036639', 'A5A5A5', 'A2231D', '3F888F', '5D9B9B'];
+  const colours = ['036639', '69e1a5', 'A2231D', '3F888F', '5D9B9B'];
   const getResults = (data, labels) => {
     const result = [];
     labels.map(({ label, title }) => {
